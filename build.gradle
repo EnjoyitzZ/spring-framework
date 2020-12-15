@@ -1,3 +1,9 @@
+//实测加上这段配置会导致项目初始构建报错
+//buildscript {
+//	repositories {
+//		maven { url "https://repo.spring.io/plugins-release"}
+//	}
+//}
 plugins {
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE' apply false
 	id 'io.spring.gradle-enterprise-conventions' version '0.0.2'
@@ -278,8 +284,13 @@ configure(allprojects) { project ->
 			cacheChangingModulesFor 0, "seconds"
 		}
 		repositories {
+//			新增2个aliyun镜像
+			maven { url "https://maven.aliyun.com/nexus/content/groups/public/" }
+			maven { url "https://maven.aliyun.com/nexus/content/repositories/jcenter/" }
 			mavenCentral()
 			maven { url "https://repo.spring.io/libs-spring-framework-build" }
+//			新增Spring插件库
+			maven { url "https://repo.spring.io/plugins-release" }
 		}
 	}
 	configurations.all {
