@@ -8,4 +8,7 @@ package com.tong.autowired;
  */
 public class I2 implements I {
 
+	public  I2() {
+		System.out.println("I2 实例化");
+	}
 }

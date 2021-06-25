@@ -9,23 +9,24 @@ import org.springframework.stereotype.Component;
  * @Author Tong
  * @Date 2021/6/25 1:01
  */
-// @Component
+ @Component
 public class A {
 
-	// @Autowired
-	I i;
+	/**
+	 * 1.自动装配需要提供setter方法或构造器
+	 * 2.@Autowired 不是自动装配，所以不需要提供setter方法或构造器；
+	 * 而是利用了java的反射，通过field.set(value,targetObject)完成注入，
+	 * 是setter的一种变体。
+	 */
+	@Autowired
+	B b;
 
-	public I getI() {
-		return i;
+	public A() {
+		System.out.println("A 实例化");
 	}
 
-	public void setI(I i) {
-		this.i = i;
+	public B getB() {
+		return b;
 	}
 
-	// public A() {}
-	//
-	// public A(I i) {
-	//
-	// }
 }

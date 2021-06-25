@@ -3,12 +3,12 @@
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	   xmlns:context="http://www.springframework.org/schema/context"
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd"
-	   default-autowire="byType">
+	   >
 
-	<context:component-scan base-package="com.tong.autowired"/>
-
-	<bean id = 'a' class="com.tong.autowired.A"/>
+	<!--自动装配 byType和byName都是通过setter自动注入，constructor则是通过构造器方法实现自动注入-->
+	<bean id = 'c' class="com.tong.autowired.C" autowire="byName"/>
 	<bean id = 'i1' class="com.tong.autowired.I1"/>
-	<!--<bean id = 'i2' class="com.tong.autowired.I2"/>-->
+	<bean id = 'i2' class="com.tong.autowired.I2"/>
+	<bean id = 'd' class="com.tong.autowired.D" autowire="constructor"/>
 
 </beans>

@@ -11,4 +11,7 @@ import org.springframework.stereotype.Component;
 // @Component
 public class I1 implements I {
 
+	public I1() {
+		System.out.println("I1 实例化");
+	}
 }
