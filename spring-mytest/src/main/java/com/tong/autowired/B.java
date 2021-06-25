@@ -1,15 +1,19 @@
 package com.tong.autowired;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class B {
 
-	@Autowired
 	A a;
 
-	public B() {
+	public B(A a) {
 		System.out.println("B 实例化");
+		this.a = a;
+		System.out.println("通过构造器向B注入A");
+	}
+
+	public A getA() {
+		return a;
 	}
 }

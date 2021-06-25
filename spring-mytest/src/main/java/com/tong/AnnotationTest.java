@@ -1,10 +1,10 @@
 package com.tong;
 
 import com.tong.autowired.A;
+import com.tong.autowired.B;
 import com.tong.config.UserConfig;
-import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.GenericApplicationContext;
 
 public class AnnotationTest {
 	public static void main(String[] args) {
@@ -17,9 +17,17 @@ public class AnnotationTest {
 		// System.out.println(context.getBean(Person.class));
 
 		/*验证@Autowired不是自动装配，通过反射注入*/
+		GenericBeanDefinition abd = (GenericBeanDefinition) context.getBeanDefinition("a");
+		System.out.println("A mode = " + abd.getAutowireMode());
 		A a = (A) context.getBean("a");
-		System.out.println(a);
-		System.out.println(a.getB());
+		System.out.println("A = " + a);
+		System.out.println("A.getB() = " + a.getB());
+
+		GenericBeanDefinition bbd = (GenericBeanDefinition) context.getBeanDefinition("b");
+		System.out.println("B mode = " + bbd.getAutowireMode());
+		B b = (B) context.getBean("b");
+		System.out.println("B = " + b);
+		System.out.println("B.getA() = " + b.getA());
 
 	}
 }

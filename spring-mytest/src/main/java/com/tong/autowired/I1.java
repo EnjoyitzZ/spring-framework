@@ -1,7 +1,5 @@
 package com.tong.autowired;
 
-import org.springframework.stereotype.Component;
-
 /**
  * @ClassName I1
  * @Description TODO
