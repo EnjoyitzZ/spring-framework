@@ -2,13 +2,24 @@ package com.tong;
 
 import com.tong.autowired.A;
 import com.tong.autowired.B;
-import com.tong.config.UserConfig;
+import com.tong.config.AppConfig;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.core.io.ClassPathResource;
+
+import java.io.IOException;
+import java.util.logging.LogManager;
 
 public class AnnotationTest {
 	public static void main(String[] args) {
-		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(UserConfig.class);
+		try {
+			LogManager.getLogManager().readConfiguration(new ClassPathResource("logging.properties").getInputStream());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+		context.register(AppConfig.class);
+		context.refresh();
 
 		// User user = (User) context.getBean("user");
 		// System.out.println(user.toString());

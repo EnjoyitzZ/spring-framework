@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
  @Configuration
  @ComponentScan("com.tong")
-public class UserConfig {
+public class AppConfig {
 
 	@Bean("user")
 	public User getUser() {
