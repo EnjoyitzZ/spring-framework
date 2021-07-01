@@ -24,7 +24,7 @@ public class A {
 	B b;
 
 	public A() {
-		System.out.println("A 实例化");
+		System.out.println("A 实例化 无参");
 	}
 
 	public B getB() {
