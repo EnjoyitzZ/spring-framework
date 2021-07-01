@@ -1,7 +1,7 @@
 package com.tong;
 
-import com.tong.autowired.C;
-import com.tong.autowired.D;
+import com.tong.autowire.xml.C;
+import com.tong.autowire.xml.D;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

@@ -1,4 +1,4 @@
-package com.tong.autowired;
+package com.tong.autowire.xml;
 
 /**
  * @ClassName I1

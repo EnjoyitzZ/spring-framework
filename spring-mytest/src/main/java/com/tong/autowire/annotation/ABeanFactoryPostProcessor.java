@@ -1,4 +1,4 @@
-package com.tong.autowired;
+package com.tong.autowire.annotation;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;

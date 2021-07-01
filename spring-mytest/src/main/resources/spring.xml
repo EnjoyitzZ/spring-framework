@@ -6,9 +6,9 @@
 	   >
 
 	<!--自动装配 byType和byName都是通过setter自动注入，constructor则是通过构造器方法实现自动注入-->
-	<bean id = 'c' class="com.tong.autowired.C" autowire="byName"/>
-	<bean id = 'i1' class="com.tong.autowired.I1"/>
-	<bean id = 'i2' class="com.tong.autowired.I2"/>
-	<bean id = 'd' class="com.tong.autowired.D" autowire="constructor"/>
+	<bean id = 'c' class="com.tong.autowire.xml.C" autowire="byName"/>
+	<bean id = 'i1' class="com.tong.autowire.xml.I1"/>
+	<bean id = 'i2' class="com.tong.autowire.xml.I2"/>
+	<bean id = 'd' class="com.tong.autowire.xml.D" autowire="constructor"/>
 
 </beans>

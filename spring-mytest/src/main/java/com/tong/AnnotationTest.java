@@ -1,7 +1,7 @@
 package com.tong;
 
-import com.tong.autowired.A;
-import com.tong.autowired.B;
+import com.tong.autowire.annotation.A;
+import com.tong.autowire.annotation.B;
 import com.tong.config.AppConfig;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

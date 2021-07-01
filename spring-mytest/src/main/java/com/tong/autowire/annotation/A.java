@@ -1,4 +1,4 @@
-package com.tong.autowired;
+package com.tong.autowire.annotation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

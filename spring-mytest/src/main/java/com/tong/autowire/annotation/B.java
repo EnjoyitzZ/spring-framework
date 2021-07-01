@@ -1,4 +1,4 @@
-package com.tong.autowired;
+package com.tong.autowire.annotation;
 
 import org.springframework.stereotype.Component;
 
