@@ -17,6 +17,10 @@ public class LifeCycleTest {
 //		}
 		// 实例化Spring容器对象
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+
+		// 手动注册一个对象到Spring容器的单例池中
+		context.getBeanFactory().registerSingleton("x", new X());
+
 		context.register(AppConfig.class);
 		// 初始化Spring容器
 		context.refresh();

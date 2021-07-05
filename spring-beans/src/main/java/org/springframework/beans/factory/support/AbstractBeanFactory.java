@@ -242,10 +242,12 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	protected <T> T doGetBean(
 			String name, @Nullable Class<T> requiredType, @Nullable Object[] args, boolean typeCheckOnly)
 			throws BeansException {
-
+		// 可简单理解为校验beanName的合法性
 		String beanName = transformedBeanName(name);
+		// 定义一个对象用存将来返回出来的bean
 		Object bean;
 
+		// 检查一下单例池当中有没有手动注册的单例对象，比如在实例化Spring容器后，手动将new出来的对象注册到Spring容器中
 		// Eagerly check singleton cache for manually registered singletons.
 		Object sharedInstance = getSingleton(beanName);
 		if (sharedInstance != null && args == null) {
