@@ -153,9 +153,16 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	 */
 	protected void addSingletonFactory(String beanName, ObjectFactory<?> singletonFactory) {
 		Assert.notNull(singletonFactory, "Singleton factory must not be null");
+		// singletonObjects 单例池 一级map
 		synchronized (this.singletonObjects) {
+			// 如果单例池中不存在才会put到二级map-singletonFactories
+			// 因为这里主要是解决循环依赖的代码，如果一个bean已经存在单例池中，说明这是一个完整的bean，
+			// 已经完成了属性注入，循环依赖也已经依赖上了
 			if (!this.singletonObjects.containsKey(beanName)) {
+				// 把bean工厂put到二级map-singletonFactories
 				this.singletonFactories.put(beanName, singletonFactory);
+				// 从三级map-earlySingletonObjects（存放半成品的bean）中移除当前bean
+				// 移除的原因是这三个map中存的是同一个对象，同时只能存在于一个map中
 				this.earlySingletonObjects.remove(beanName);
 				this.registeredSingletons.add(beanName);
 			}
@@ -179,9 +186,17 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	@Nullable
 	protected Object getSingleton(String beanName, boolean allowEarlyReference) {
 		// Quick check for existing instance without full singleton lock
+		// 从单例池（一级缓存）中直接获取当前bean对象
+		// 这也是getBean(xxx)能获取到完整初始化bean的底层代码
 		Object singletonObject = this.singletonObjects.get(beanName);
+		// 如果X与Y的循环依赖，代码执行到这里是x注入y，创建y，y注入x，获取x的时候，那么x此时还未初始化完成不在单例池中
+		// 所以一下两个判断都成立，进入if
 		if (singletonObject == null && isSingletonCurrentlyInCreation(beanName)) {
+			// 出于对性能的考虑，先从三级缓存中获取x，如果拿得到，就不用去二级缓存拿x的bean工厂返回一个x了
 			singletonObject = this.earlySingletonObjects.get(beanName);
+			// 但是此时从三级缓存拿不到x，走到这x只在二级缓存暴露了一个bean工厂对象
+			// 如果是X、Y、Z相互循环依赖，那么在y注入x的时候是从二级缓存听过工厂返回一个x，并存到了三级缓存，
+			// 等到z注入x的时，就能从三级缓存中拿到x了
 			if (singletonObject == null && allowEarlyReference) {
 				synchronized (this.singletonObjects) {
 					// Consistent creation of early reference within full singleton lock
@@ -189,10 +204,15 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 					if (singletonObject == null) {
 						singletonObject = this.earlySingletonObjects.get(beanName);
 						if (singletonObject == null) {
+							// 从二级缓存中获取一个x的singletonFactory，根据前文分析可以拿到
 							ObjectFactory<?> singletonFactory = this.singletonFactories.get(beanName);
 							if (singletonFactory != null) {
+								// 调用工厂对象的getObject()方法返回一个半成品的x，而且如果x需要加代理（aop），
+								// getObject()方法能判断x被aop配置了，就返回一个代理的x
 								singletonObject = singletonFactory.getObject();
+								// 将x的半成品的bean放入三级缓存
 								this.earlySingletonObjects.put(beanName, singletonObject);
+								// 从二级缓存中移除x的工厂对象
 								this.singletonFactories.remove(beanName);
 							}
 						}
