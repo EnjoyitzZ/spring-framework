@@ -63,6 +63,14 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	 * through {@link #register} calls and then manually {@linkplain #refresh refreshed}.
 	 */
 	public AnnotationConfigApplicationContext() {
+		/*
+		  AnnotatedBeanDefinitionReader的作用：
+		   1、主要是可以动态、显示的注册一个bean；
+		   2、而且具备解析一个类的功能；和扫描解析一个类的功能相同；
+		  AnnotatedBeanDefinitionReader的应用场景：
+		   1、可以显示、动态注册一个程序员提供的bean；
+		   2、在初始化spring容器的过程中他完成了对配置类的注册和解析功能；
+		 */
 		this.reader = new AnnotatedBeanDefinitionReader(this);
 		this.scanner = new ClassPathBeanDefinitionScanner(this);
 	}

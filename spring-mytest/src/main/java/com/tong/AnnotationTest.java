@@ -2,6 +2,7 @@ package com.tong;
 
 import com.tong.autowire.annotation.A;
 import com.tong.autowire.annotation.B;
+import com.tong.autowire.annotation.S;
 import com.tong.config.AppConfig;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -40,5 +41,7 @@ public class AnnotationTest {
 		System.out.println("B = " + b);
 		System.out.println("B.getA() = " + b.getA());
 
+		S s = (S) context.getBean("s");
+		System.out.println("S.getA() = " + s.getA());
 	}
 }

@@ -21,6 +21,7 @@ public class LifeCycleTest {
 		// 手动注册一个对象到Spring容器的单例池中
 		context.getBeanFactory().registerSingleton("x", new X());
 
+		// 手动注册配置类，需要在自动扫描前解析配置
 		context.register(AppConfig.class);
 		// 初始化Spring容器
 		context.refresh();
