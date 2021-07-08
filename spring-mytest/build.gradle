@@ -16,4 +16,8 @@ dependencies {
     compile(project(":spring-core"))
     compile(project(":spring-aop"))
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile (
+            'org.mybatis:mybatis:3.5.7',
+            'org.mybatis:mybatis-spring:2.0.6'
+    )
 }
