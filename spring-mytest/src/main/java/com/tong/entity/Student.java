@@ -4,6 +4,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Student extends Person {
+	/**
+	 * super和this指向的是同一个对象，即当前对象；
+	 * super只能调用从父类继承而来的属性或方法，而且是直接通过子类调用，而不是父类。
+	 */
 	private long id;
 	private String name;
 
@@ -36,6 +40,8 @@ public class Student extends Person {
 		System.out.println("super---------");
 		super.getName();
 		super.getAge();
+		System.out.println(super.getClass());
+		"".concat("");
 	}
 
 	public static void main(String[] args) {
